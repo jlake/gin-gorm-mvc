@@ -1,0 +1,39 @@
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Environment
+.env
+
+# Documentation
+README.md
+*.md
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# Build
+bin/
+dist/
+build/
+
+# Logs
+*.log
+
+# Test
+*_test.go
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Dependencies (will be downloaded in Docker)
+vendor/
