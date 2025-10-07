@@ -1,0 +1,52 @@
+{{ define "title" }}ホーム - Gin GORM MVC{{ end }}
+
+{{ define "content" }}
+<header>
+    <div class="container">
+        <h1>📰 記事サイト</h1>
+        <p>Gin + GORM + MySQL + Redis で構築されたMVCアーキテクチャ</p>
+    </div>
+</header>
+
+<nav>
+    <div class="container">
+        <a href="/">ホーム</a>
+        <a href="/front/articles">記事一覧</a>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="card">
+        <h2>🎉 ようこそ！</h2>
+        <p>このサイトは、Go言語のGinフレームワークとGORM、MySQL、Redisを使用して構築されています。</p>
+        <br>
+        <a href="/front/articles" class="btn">記事を見る</a>
+    </div>
+
+    <div class="card">
+        <h3>✨ 主な機能</h3>
+        <ul style="list-style-position: inside; margin-top: 10px;">
+            <li>記事の閲覧</li>
+            <li>著者別記事の表示</li>
+            <li>ユーザー情報の閲覧</li>
+            <li>RESTful APIの提供</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h3>🔧 技術スタック</h3>
+        <ul style="list-style-position: inside; margin-top: 10px;">
+            <li><strong>Gin</strong> - Webフレームワーク</li>
+            <li><strong>GORM</strong> - ORM</li>
+            <li><strong>MySQL</strong> - データベース</li>
+            <li><strong>Redis</strong> - キャッシュ</li>
+        </ul>
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2025 Gin GORM MVC Project</p>
+    </div>
+</footer>
+{{ end }}

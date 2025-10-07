@@ -1,0 +1,43 @@
+{{ define "title" }}記事一覧 - Gin GORM MVC{{ end }}
+
+{{ define "content" }}
+<header>
+    <div class="container">
+        <h1>📰 記事一覧</h1>
+    </div>
+</header>
+
+<nav>
+    <div class="container">
+        <a href="/">ホーム</a>
+        <a href="/front/articles">記事一覧</a>
+    </div>
+</nav>
+
+<div class="container">
+    {{ if .articles }}
+        {{ range .articles }}
+        <div class="card">
+            <h2 style="color: #667eea;">{{ .Title }}</h2>
+            <p style="color: #666; font-size: 0.9em; margin: 10px 0;">
+                📝 著者: {{ .Author.Username }} |
+                👁️ 閲覧数: {{ .ViewCount }} |
+                📅 {{ .CreatedAt.Format "2006-01-02 15:04" }}
+            </p>
+            <p style="margin: 15px 0;">{{ .Content }}</p>
+            <a href="/front/articles/{{ .ID }}" class="btn">詳細を見る</a>
+        </div>
+        {{ end }}
+    {{ else }}
+        <div class="card">
+            <p style="text-align: center; color: #999;">まだ記事がありません</p>
+        </div>
+    {{ end }}
+</div>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2025 Gin GORM MVC Project</p>
+    </div>
+</footer>
+{{ end }}

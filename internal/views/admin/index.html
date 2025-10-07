@@ -1,0 +1,61 @@
+{{ define "title" }}管理画面 - Gin GORM MVC{{ end }}
+
+{{ define "content" }}
+<header>
+    <div class="container">
+        <h1>⚙️ 管理画面</h1>
+        <p>コンテンツ管理システム</p>
+    </div>
+</header>
+
+<nav>
+    <div class="container">
+        <a href="/admin">ダッシュボード</a>
+        <a href="/admin/users">ユーザー管理</a>
+        <a href="/admin/articles">記事管理</a>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="card">
+        <h2>📊 ダッシュボード</h2>
+        <p>システムの管理と監視を行います。</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+        <div class="card" style="text-align: center;">
+            <h3 style="color: #667eea; font-size: 2em; margin-bottom: 10px;">👥</h3>
+            <h4>ユーザー管理</h4>
+            <p style="color: #999; margin: 10px 0;">ユーザーの作成・編集・削除</p>
+            <a href="/admin/users" class="btn">管理する</a>
+        </div>
+
+        <div class="card" style="text-align: center;">
+            <h3 style="color: #667eea; font-size: 2em; margin-bottom: 10px;">📝</h3>
+            <h4>記事管理</h4>
+            <p style="color: #999; margin: 10px 0;">記事の作成・編集・削除</p>
+            <a href="/admin/articles" class="btn">管理する</a>
+        </div>
+
+        <div class="card" style="text-align: center;">
+            <h3 style="color: #667eea; font-size: 2em; margin-bottom: 10px;">💾</h3>
+            <h4>データベース</h4>
+            <p style="color: #999; margin: 10px 0;">MySQL データベース管理</p>
+            <a href="http://localhost:8888" target="_blank" class="btn">phpMyAdmin</a>
+        </div>
+
+        <div class="card" style="text-align: center;">
+            <h3 style="color: #667eea; font-size: 2em; margin-bottom: 10px;">🔴</h3>
+            <h4>キャッシュ</h4>
+            <p style="color: #999; margin: 10px 0;">Redis キャッシュ管理</p>
+            <a href="http://localhost:8889" target="_blank" class="btn">Redis Commander</a>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2025 Gin GORM MVC Project - Admin Panel</p>
+    </div>
+</footer>
+{{ end }}

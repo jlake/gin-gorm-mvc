@@ -7,16 +7,26 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func SetupAdminRoutes(r *gin.Engine, userCtrl *controllers.UserController, articleCtrl *controllers.ArticleController) {
+func SetupAdminRoutes(r *gin.Engine, userCtrl *controllers.UserController, articleCtrl *controllers.ArticleController, adminCtrl *controllers.AdminController) {
+	// HTMLテンプレートの読み込み
+	r.LoadHTMLGlob("internal/views/**/*")
+
 	// ミドルウェアの適用
 	r.Use(middleware.CORS())
 	r.Use(middleware.Logger())
 	r.Use(middleware.Recovery())
 
-	// 管理画面ルート
-	admin := r.Group("/admin")
+	// トップページ
+	r.GET("/", adminCtrl.Index)
+	r.GET("/admin", adminCtrl.Index)
+
+	// 管理画面HTMLページ
+	r.GET("/admin/users", adminCtrl.Users)
+
+	// JSON API
+	admin := r.Group("/admin/api")
 	{
-		// ユーザー管理
+		// ユーザー管理API
 		users := admin.Group("/users")
 		{
 			users.POST("", userCtrl.CreateUser)
@@ -26,7 +36,7 @@ func SetupAdminRoutes(r *gin.Engine, userCtrl *controllers.UserController, artic
 			users.DELETE("/:id", userCtrl.DeleteUser)
 		}
 
-		// 記事管理
+		// 記事管理API
 		articles := admin.Group("/articles")
 		{
 			articles.POST("", articleCtrl.CreateArticle)

@@ -46,12 +46,13 @@ func main() {
 	// コントローラの初期化
 	userCtrl := controllers.NewUserController(userService)
 	articleCtrl := controllers.NewArticleController(articleService)
+	frontCtrl := controllers.NewFrontController(userService, articleService)
 
 	// Ginエンジンの初期化
 	r := gin.Default()
 
 	// ルートの設定
-	routes.SetupFrontRoutes(r, userCtrl, articleCtrl)
+	routes.SetupFrontRoutes(r, userCtrl, articleCtrl, frontCtrl)
 
 	// サーバー起動
 	port := fmt.Sprintf(":%s", config.AppConfig.Server.FrontPort)

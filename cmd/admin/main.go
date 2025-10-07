@@ -46,12 +46,13 @@ func main() {
 	// コントローラの初期化
 	userCtrl := controllers.NewUserController(userService)
 	articleCtrl := controllers.NewArticleController(articleService)
+	adminCtrl := controllers.NewAdminController(userService, articleService)
 
 	// Ginエンジンの初期化
 	r := gin.Default()
 
 	// ルートの設定
-	routes.SetupAdminRoutes(r, userCtrl, articleCtrl)
+	routes.SetupAdminRoutes(r, userCtrl, articleCtrl, adminCtrl)
 
 	// サーバー起動
 	port := fmt.Sprintf(":%s", config.AppConfig.Server.AdminPort)

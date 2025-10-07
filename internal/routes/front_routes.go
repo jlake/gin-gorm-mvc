@@ -7,22 +7,29 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func SetupFrontRoutes(r *gin.Engine, userCtrl *controllers.UserController, articleCtrl *controllers.ArticleController) {
+func SetupFrontRoutes(r *gin.Engine, userCtrl *controllers.UserController, articleCtrl *controllers.ArticleController, frontCtrl *controllers.FrontController) {
+	// HTMLテンプレートの読み込み
+	r.LoadHTMLGlob("internal/views/**/*")
+
 	// ミドルウェアの適用
 	r.Use(middleware.CORS())
 	r.Use(middleware.Logger())
 	r.Use(middleware.Recovery())
 
+	// トップページ
+	r.GET("/", frontCtrl.Index)
+
 	// フロントエンドルート
 	front := r.Group("/front")
 	{
-		// 記事の閲覧（公開のみ）
-		front.GET("/articles", articleCtrl.GetAllArticles)
-		front.GET("/articles/:id", articleCtrl.GetArticle)
-		front.GET("/articles/author/:author_id", articleCtrl.GetArticlesByAuthor)
+		// HTMLページ
+		front.GET("/articles", frontCtrl.Articles)
 
-		// ユーザー情報の閲覧
-		front.GET("/users/:id", userCtrl.GetUser)
+		// JSON API（既存）
+		front.GET("/api/articles", articleCtrl.GetAllArticles)
+		front.GET("/api/articles/:id", articleCtrl.GetArticle)
+		front.GET("/api/articles/author/:author_id", articleCtrl.GetArticlesByAuthor)
+		front.GET("/api/users/:id", userCtrl.GetUser)
 	}
 
 	// ヘルスチェック
