@@ -267,11 +267,13 @@ make deps           # 依存関係の更新
 make clean          # ビルドファイルを削除
 ```
 
-## API エンドポイント
+## エンドポイント
 
-### APIモジュール (`/api/v1`)
+### APIモジュール (ポート: 8080)
 
-#### ユーザー
+JSON APIを提供します。
+
+#### ユーザーAPI
 
 - `POST /api/v1/users` - ユーザー作成
 - `GET /api/v1/users` - ユーザー一覧
@@ -279,7 +281,7 @@ make clean          # ビルドファイルを削除
 - `PUT /api/v1/users/:id` - ユーザー更新
 - `DELETE /api/v1/users/:id` - ユーザー削除
 
-#### 記事
+#### 記事API
 
 - `POST /api/v1/articles` - 記事作成
 - `GET /api/v1/articles` - 記事一覧
@@ -288,16 +290,42 @@ make clean          # ビルドファイルを削除
 - `PUT /api/v1/articles/:id` - 記事更新
 - `DELETE /api/v1/articles/:id` - 記事削除
 
-### フロントエンドモジュール (`/front`)
+### Frontモジュール (ポート: 8081)
 
-- `GET /front/articles` - 記事一覧
-- `GET /front/articles/:id` - 記事詳細
-- `GET /front/articles/author/:author_id` - 著者別記事一覧
-- `GET /front/users/:id` - ユーザー詳細
+HTMLページとJSON APIの両方を提供します。
 
-### 管理画面モジュール (`/admin`)
+#### HTMLページ
+- **`GET /`** - トップページ
+- **`GET /front/articles`** - 記事一覧ページ
+- `GET /health` - ヘルスチェック
 
-- APIモジュールと同じエンドポイント（`/admin`プレフィックス付き）
+#### JSON API
+- `GET /front/api/articles` - 記事一覧（JSON）
+- `GET /front/api/articles/:id` - 記事詳細（JSON）
+- `GET /front/api/articles/author/:author_id` - 著者別記事一覧（JSON）
+- `GET /front/api/users/:id` - ユーザー詳細（JSON）
+
+### Adminモジュール (ポート: 8082)
+
+管理画面用のHTMLページとJSON APIを提供します。
+
+#### HTMLページ
+- **`GET /`** - 管理画面ダッシュボード
+- **`GET /admin`** - 管理画面ダッシュボード
+- **`GET /admin/users`** - ユーザー管理ページ
+- `GET /health` - ヘルスチェック
+
+#### JSON API
+- `POST /admin/api/users` - ユーザー作成
+- `GET /admin/api/users` - ユーザー一覧
+- `GET /admin/api/users/:id` - ユーザー詳細
+- `PUT /admin/api/users/:id` - ユーザー更新
+- `DELETE /admin/api/users/:id` - ユーザー削除
+- `POST /admin/api/articles` - 記事作成
+- `GET /admin/api/articles` - 記事一覧
+- `GET /admin/api/articles/:id` - 記事詳細
+- `PUT /admin/api/articles/:id` - 記事更新
+- `DELETE /admin/api/articles/:id` - 記事削除
 
 ## アーキテクチャ
 
@@ -311,6 +339,7 @@ make clean          # ビルドファイルを削除
 
 ## 機能
 
+### バックエンド
 - ✅ RESTful API
 - ✅ MVCアーキテクチャ
 - ✅ GORM（ORM）
@@ -322,9 +351,19 @@ make clean          # ビルドファイルを削除
 - ✅ 依存性注入
 - ✅ エラーハンドリング
 - ✅ ページネーション
+
+### フロントエンド
+- ✅ HTMLテンプレート（Go Template）
+- ✅ レスポンシブデザイン
+- ✅ Front用Webページ
+- ✅ Admin用管理画面
+
+### インフラ
 - ✅ Docker対応
 - ✅ Docker Compose設定
-- ✅ phpMyAdmin / Redis Commander付属
+- ✅ phpMyAdmin（データベース管理）
+- ✅ Redis Commander（キャッシュ管理）
+- ✅ Makefileによるタスク自動化
 
 ## Docker環境の詳細
 
