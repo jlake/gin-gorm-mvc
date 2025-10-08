@@ -11,6 +11,10 @@ func SetupAdminRoutes(r *gin.Engine, userCtrl *controllers.UserController, artic
 	// HTMLテンプレートの読み込み
 	r.LoadHTMLGlob("internal/views/**/*")
 
+	// 静的ファイルの配信
+	r.Static("/css", "./public/css")
+	r.Static("/js", "./public/js")
+
 	// ミドルウェアの適用
 	r.Use(middleware.CORS())
 	r.Use(middleware.Logger())

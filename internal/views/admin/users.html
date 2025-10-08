@@ -5,69 +5,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ユーザー管理 - Admin</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background-color: #f5f5f5; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-        header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        nav { background-color: white; padding: 15px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 30px; }
-        nav a { color: #667eea; text-decoration: none; padding: 10px 20px; margin: 0 5px; border-radius: 5px; transition: all 0.3s; }
-        nav a:hover { background-color: #667eea; color: white; }
-        .card { background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 20px; margin-bottom: 20px; }
-        footer { background-color: #333; color: white; text-align: center; padding: 20px 0; margin-top: 40px; }
-    </style>
+    <link rel="stylesheet" href="/css/admin.css">
 </head>
 <body>
 <header>
-    <div class="container">
-        <h1>👥 ユーザー管理</h1>
-    </div>
+    <h1>👥 ユーザー管理</h1>
 </header>
 
 <nav>
-    <div class="container">
-        <a href="/admin">ダッシュボード</a>
-        <a href="/admin/users">ユーザー管理</a>
-        <a href="/admin/articles">記事管理</a>
-    </div>
+    <ul>
+        <li><a href="/admin">ダッシュボード</a></li>
+        <li><a href="/admin/users">ユーザー管理</a></li>
+        <li><a href="/admin/articles">記事管理</a></li>
+    </ul>
 </nav>
 
-<div class="container">
-    <div class="card">
-        <h2>ユーザー一覧</h2>
-        <p style="margin-bottom: 20px;">登録されているすべてのユーザー</p>
+<main>
+    <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+        <h2 style="color: #667eea; margin-bottom: 1rem;">ユーザー一覧</h2>
+        <p style="margin-bottom: 20px; color: #666;">登録されているすべてのユーザー</p>
 
         {{ if .users }}
-        <table style="width: 100%; border-collapse: collapse;">
+        <table>
             <thead>
-                <tr style="background-color: #f5f5f5;">
-                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">ID</th>
-                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">ユーザー名</th>
-                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">メール</th>
-                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">役割</th>
-                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">ステータス</th>
-                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">作成日</th>
+                <tr>
+                    <th>ID</th>
+                    <th>ユーザー名</th>
+                    <th>メール</th>
+                    <th>役割</th>
+                    <th>ステータス</th>
+                    <th>作成日</th>
                 </tr>
             </thead>
             <tbody>
                 {{ range .users }}
-                <tr style="border-bottom: 1px solid #eee;">
-                    <td style="padding: 12px;">{{ .ID }}</td>
-                    <td style="padding: 12px;"><strong>{{ .Username }}</strong></td>
-                    <td style="padding: 12px;">{{ .Email }}</td>
-                    <td style="padding: 12px;">
-                        <span style="padding: 4px 8px; background-color: {{ if eq .Role "admin" }}#764ba2{{ else }}#667eea{{ end }}; color: white; border-radius: 3px; font-size: 0.85em;">
+                <tr>
+                    <td>{{ .ID }}</td>
+                    <td><strong>{{ .Username }}</strong></td>
+                    <td>{{ .Email }}</td>
+                    <td>
+                        <span class="badge {{ if eq .Role "admin" }}badge-admin{{ else }}badge-user{{ end }}">
                             {{ .Role }}
                         </span>
                     </td>
-                    <td style="padding: 12px;">
+                    <td>
                         {{ if eq .Status 1 }}
-                        <span style="color: green;">●</span> アクティブ
+                        <span class="badge badge-active">アクティブ</span>
                         {{ else }}
-                        <span style="color: red;">●</span> 非アクティブ
+                        <span class="badge badge-inactive">非アクティブ</span>
                         {{ end }}
                     </td>
-                    <td style="padding: 12px;">{{ .CreatedAt.Format "2006-01-02" }}</td>
+                    <td>{{ .CreatedAt.Format "2006-01-02" }}</td>
                 </tr>
                 {{ end }}
             </tbody>
@@ -76,13 +64,13 @@
         <p style="text-align: center; color: #999; padding: 40px 0;">ユーザーがまだ登録されていません</p>
         {{ end }}
     </div>
-</div>
+</main>
 
 <footer>
-    <div class="container">
-        <p>&copy; 2025 Gin GORM MVC Project - Admin Panel</p>
-    </div>
+    <p>&copy; 2025 Gin GORM MVC Project - Admin Panel</p>
 </footer>
+
+<script src="/js/admin.js"></script>
 </body>
 </html>
 {{ end }}

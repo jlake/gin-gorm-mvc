@@ -5,78 +5,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>管理画面 - Gin GORM MVC</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background-color: #f5f5f5; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-        header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        nav { background-color: white; padding: 15px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 30px; }
-        nav a { color: #667eea; text-decoration: none; padding: 10px 20px; margin: 0 5px; border-radius: 5px; transition: all 0.3s; }
-        nav a:hover { background-color: #667eea; color: white; }
-        .card { background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 20px; margin-bottom: 20px; }
-        .btn { display: inline-block; padding: 10px 20px; background: #667eea; color: white; text-decoration: none; border-radius: 5px; transition: all 0.3s; }
-        .btn:hover { background: #764ba2; }
-        footer { background-color: #333; color: white; text-align: center; padding: 20px 0; margin-top: 40px; }
-    </style>
+    <link rel="stylesheet" href="/css/admin.css">
 </head>
 <body>
 <header>
-    <div class="container">
-        <h1>⚙️ 管理画面</h1>
-        <p>コンテンツ管理システム</p>
-    </div>
+    <h1>⚙️ 管理画面</h1>
+    <p>コンテンツ管理システム</p>
 </header>
 
 <nav>
-    <div class="container">
-        <a href="/admin">ダッシュボード</a>
-        <a href="/admin/users">ユーザー管理</a>
-        <a href="/admin/articles">記事管理</a>
-    </div>
+    <ul>
+        <li><a href="/admin">ダッシュボード</a></li>
+        <li><a href="/admin/users">ユーザー管理</a></li>
+        <li><a href="/admin/articles">記事管理</a></li>
+    </ul>
 </nav>
 
-<div class="container">
-    <div class="card">
+<main>
+    <div class="welcome">
         <h2>📊 ダッシュボード</h2>
         <p>システムの管理と監視を行います。</p>
     </div>
 
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-        <div class="card" style="text-align: center;">
-            <h3 style="color: #667eea; font-size: 2em; margin-bottom: 10px;">👥</h3>
-            <h4>ユーザー管理</h4>
-            <p style="color: #999; margin: 10px 0;">ユーザーの作成・編集・削除</p>
-            <a href="/admin/users" class="btn">管理する</a>
+    <div class="cards">
+        <div class="card">
+            <h3>👥 ユーザー管理</h3>
+            <p>ユーザーの作成・編集・削除</p>
+            <a href="/admin/users">管理する</a>
         </div>
 
-        <div class="card" style="text-align: center;">
-            <h3 style="color: #667eea; font-size: 2em; margin-bottom: 10px;">📝</h3>
-            <h4>記事管理</h4>
-            <p style="color: #999; margin: 10px 0;">記事の作成・編集・削除</p>
-            <a href="/admin/articles" class="btn">管理する</a>
+        <div class="card">
+            <h3>📝 記事管理</h3>
+            <p>記事の作成・編集・削除</p>
+            <a href="/admin/articles">管理する</a>
         </div>
 
-        <div class="card" style="text-align: center;">
-            <h3 style="color: #667eea; font-size: 2em; margin-bottom: 10px;">💾</h3>
-            <h4>データベース</h4>
-            <p style="color: #999; margin: 10px 0;">MySQL データベース管理</p>
-            <a href="http://localhost:8888" target="_blank" class="btn">phpMyAdmin</a>
+        <div class="card">
+            <h3>💾 データベース</h3>
+            <p>MySQL データベース管理</p>
+            <a href="http://localhost:8888" target="_blank">phpMyAdmin</a>
         </div>
 
-        <div class="card" style="text-align: center;">
-            <h3 style="color: #667eea; font-size: 2em; margin-bottom: 10px;">🔴</h3>
-            <h4>キャッシュ</h4>
-            <p style="color: #999; margin: 10px 0;">Redis キャッシュ管理</p>
-            <a href="http://localhost:8889" target="_blank" class="btn">Redis Commander</a>
+        <div class="card">
+            <h3>🔴 キャッシュ</h3>
+            <p>Redis キャッシュ管理</p>
+            <a href="http://localhost:8889" target="_blank">Redis Commander</a>
         </div>
     </div>
-</div>
+</main>
 
 <footer>
-    <div class="container">
-        <p>&copy; 2025 Gin GORM MVC Project - Admin Panel</p>
-    </div>
+    <p>&copy; 2025 Gin GORM MVC Project - Admin Panel</p>
 </footer>
+
+<script src="/js/admin.js"></script>
 </body>
 </html>
 {{ end }}

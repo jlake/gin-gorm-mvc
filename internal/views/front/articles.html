@@ -5,60 +5,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>記事一覧 - Gin GORM MVC</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background-color: #f5f5f5; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-        header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        nav { background-color: white; padding: 15px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 30px; }
-        nav a { color: #667eea; text-decoration: none; padding: 10px 20px; margin: 0 5px; border-radius: 5px; transition: all 0.3s; }
-        nav a:hover { background-color: #667eea; color: white; }
-        .card { background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 20px; margin-bottom: 20px; }
-        .btn { display: inline-block; padding: 10px 20px; background: #667eea; color: white; text-decoration: none; border-radius: 5px; transition: all 0.3s; }
-        .btn:hover { background: #764ba2; }
-        footer { background-color: #333; color: white; text-align: center; padding: 20px 0; margin-top: 40px; }
-    </style>
+    <link rel="stylesheet" href="/css/front.css">
 </head>
 <body>
 <header>
-    <div class="container">
-        <h1>📰 記事一覧</h1>
-    </div>
+    <h1>📰 記事一覧</h1>
 </header>
 
 <nav>
-    <div class="container">
-        <a href="/">ホーム</a>
-        <a href="/front/articles">記事一覧</a>
-    </div>
+    <ul>
+        <li><a href="/">ホーム</a></li>
+        <li><a href="/front/articles">記事一覧</a></li>
+    </ul>
 </nav>
 
-<div class="container">
-    {{ if .articles }}
-        {{ range .articles }}
-        <div class="card">
-            <h2 style="color: #667eea;">{{ .Title }}</h2>
-            <p style="color: #666; font-size: 0.9em; margin: 10px 0;">
-                📝 著者: {{ .Author.Username }} |
-                👁️ 閲覧数: {{ .ViewCount }} |
-                📅 {{ .CreatedAt.Format "2006-01-02 15:04" }}
-            </p>
-            <p style="margin: 15px 0;">{{ .Content }}</p>
-            <a href="/front/articles/{{ .ID }}" class="btn">詳細を見る</a>
-        </div>
+<main>
+    <div class="articles">
+        <h2>記事一覧</h2>
+        {{ if .articles }}
+            {{ range .articles }}
+            <div class="article-item">
+                <h3><a href="/front/articles/{{ .ID }}">{{ .Title }}</a></h3>
+                <div class="article-meta">
+                    📝 著者: {{ .Author.Username }} |
+                    👁️ 閲覧数: {{ .ViewCount }} |
+                    📅 {{ .CreatedAt.Format "2006-01-02 15:04" }}
+                </div>
+                <p>{{ .Content }}</p>
+            </div>
+            {{ end }}
+        {{ else }}
+            <p class="no-articles">まだ記事がありません</p>
         {{ end }}
-    {{ else }}
-        <div class="card">
-            <p style="text-align: center; color: #999;">まだ記事がありません</p>
-        </div>
-    {{ end }}
-</div>
+    </div>
+</main>
 
 <footer>
-    <div class="container">
-        <p>&copy; 2025 Gin GORM MVC Project</p>
-    </div>
+    <p>&copy; 2025 Gin GORM MVC Project</p>
 </footer>
+
+<script src="/js/front.js"></script>
 </body>
 </html>
 {{ end }}
